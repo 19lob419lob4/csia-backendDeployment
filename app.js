@@ -145,7 +145,5 @@ app.get('/loggedIn', async(req,res)=>{
 })
 
 
-// start app server on port 3001
-const port = process.env.port || 3001;
-app.listen(port,()=>console.log('Active on port 3001'));
+app.listen(8080,()=>console.log('Active on port 8080'));
 
