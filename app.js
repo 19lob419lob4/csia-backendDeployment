@@ -131,7 +131,7 @@ app.post('/login', async(req,res)=>{
 
     } catch(err){
         console.log('mongoDB password was incorrect')
-        res.status(502).send(err);
+        res.status(505).send(err);
     }
 });
 
@@ -140,12 +140,12 @@ app.get('/loggedIn', async(req,res)=>{
     try{
         res.send({login_status:loggedIn});
     }catch(err){
-        res.send(502).send(err)
+        res.send(505).send(err)
     }
 })
 
 
-// start login server on port 3001
+// start app server on port 3001
 const port = process.env.port || 3001;
 app.listen(port,()=>console.log('Active on port 3001'));
 
