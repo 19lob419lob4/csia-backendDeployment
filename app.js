@@ -9,17 +9,16 @@ var cors = require('cors');
 const Subject = require('./schemas/subjectSchema');
 const Topic = require('./schemas/topicSchema-ClassVer');
 
-// var login = express();
-// login.use(bodyParser.json());
-// login.use(bodyParser.urlencoded({ extended: true}));
-// login.use(cors());
-
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(cors());
 
 var loggedIn = false;
+
+app.get('/', (req,res)=>{
+    res.send('Welcome to Cardify API')
+})
 
 var mongoServer = async(mongoAtlasUri,res)=>{
     // connect to mongodb cluster databse with mongoose
@@ -147,6 +146,6 @@ app.get('/loggedIn', async(req,res)=>{
 
 
 // start login server on port 3001
-const port = process.env.port || 3000;
+const port = process.env.port || 3001;
 app.listen(port,()=>console.log('Active on port 3001'));
 
