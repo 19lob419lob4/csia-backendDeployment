@@ -9,27 +9,11 @@ var cors = require('cors');
 const Subject = require('./schemas/subjectSchema');
 const Topic = require('./schemas/topicSchema-ClassVer');
 
-// var login = express();
-// login.use(bodyParser.json());
-// login.use(bodyParser.urlencoded({ extended: true}));
-// login.use(cors());
+
 
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
-
-app.use((req,res)=>{
-    res.header("Access-Control-Allow-Origin","*");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-        );
-    if(req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT, DELETE, POST, GET');
-        res.status(200).send('cors')
-        
-
-
 app.use(cors());
 
 var loggedIn = false;
@@ -170,9 +154,6 @@ app.post('/logout', async(req,res)=>{
 })
 
 
-<<<<<<< HEAD
 // start login server on port 8080
-=======
->>>>>>> 5b5aaf91ac8c707cda6d017cd4fd2e4975bd8f41
 app.listen(8080,()=>console.log('Active on port 8080'));
 
