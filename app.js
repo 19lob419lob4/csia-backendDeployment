@@ -9,16 +9,17 @@ var cors = require('cors');
 const Subject = require('./schemas/subjectSchema');
 const Topic = require('./schemas/topicSchema-ClassVer');
 
+// var login = express();
+// login.use(bodyParser.json());
+// login.use(bodyParser.urlencoded({ extended: true}));
+// login.use(cors());
+
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(cors());
 
 var loggedIn = false;
-
-app.get('/', (req,res)=>{
-    res.send('Welcome to Cardify API')
-})
 
 var mongoServer = async(mongoAtlasUri,res)=>{
     // connect to mongodb cluster databse with mongoose
@@ -131,7 +132,7 @@ app.post('/login', async(req,res)=>{
 
     } catch(err){
         console.log('mongoDB password was incorrect')
-        res.status(505).send(err);
+        res.status(502).send(err);
     }
 });
 
@@ -140,12 +141,22 @@ app.get('/loggedIn', async(req,res)=>{
     try{
         res.send({login_status:loggedIn});
     }catch(err){
-        res.send(505).send(err)
+        res.send(502).send(err)
+    }
+})
+
+app.post('/logout', async(req,res)=>{
+    try{
+        mongoose.connection.close();
+        loggedIn = false;
+        res.send({login_status:loggedIn})
+    }
+    catch(err){
+        res.send(502).send(err)
     }
 })
 
 
-// start app server on port 3001
-const port = process.env.port || 3001;
-app.listen(port,()=>console.log('Active on port 3001'));
+// start login server on port 8080
+app.listen(8080,()=>console.log('Active on port 8080'));
 
